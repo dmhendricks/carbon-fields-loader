@@ -20,7 +20,7 @@ I'm not going to do a release until this thing isn't terrible.
 (I haven't actually tested this yet - I just created this repo.)
 
 * WordPress 4.0 or higher
-* PHP 5.3.2 or higher (although if you're running <5.5 I probably won't care)
+* PHP 5.3.29 or higher (although if you're running <5.5 I probably won't care)
 
 ## How do I use it correctly with my plugin/theme?
 
