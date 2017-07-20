@@ -23,7 +23,7 @@ class Plugin {
 
   public function load_plugin() {
     if(!$this->verify_dependencies()) return;
-    wp_die('loaded!');
+
     // Core plugin logic
     //new Core();
 
