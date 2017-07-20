@@ -37,3 +37,8 @@ A: If you just want to pull the latest release version of Carbon Fields from the
 *Q: How can I get auto-updates?*
 
 A: Install [GitHub Updater](https://github.com/afragen/github-updater).
+
+## Changelog
+
+**2.0.3 (master)**
+* Initial commit
