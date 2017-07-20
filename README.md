@@ -8,6 +8,8 @@ This plugin is **not** officially supported by htmlBurger, the makers of Carbon 
 
 Currently, this *simply loads Carbon Fields* and nothing more.
 
+I'm not going to do a release until this thing isn't terrible.
+
 ### Potential Features
 
 * I need to come up with a reason to include a settings page, [#obviously](https://twitter.com/hashtag/obviously). It would be a good way to test to make sure everything is in place.
