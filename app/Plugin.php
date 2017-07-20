@@ -56,7 +56,7 @@ class Plugin {
     * @return bool
     */
   public function is_production() {
-    return ( !defined('WP_ENV') || (defined('WP_ENV') && !in_array(WP_ENV, ['development', 'staging']) ) );
+    return ( !defined('WP_ENV') || (defined('WP_ENV') && !in_array(WP_ENV, array('development', 'staging') ) ) );
   }
 
   /**
