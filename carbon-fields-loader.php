@@ -44,7 +44,6 @@ new \TwoLabNet\CarbonFieldsLoader\Plugin(array(
 	'url' => plugin_dir_url(__FILE__),
 	'plugin_loader' => implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __FILE__), -2, 2, true)),
 	'prefix' => 'cfloader_',
-	'menu_title' => __('Carbon Fields'),
 	'deps' => array('carbon_fields' => '2.0.0')
 ));
 ?>

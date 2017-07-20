@@ -10,15 +10,19 @@ class Settings extends Plugin {
     */
   function __construct() {
 
-    // Add an options page. You knew that I had to.
+    // Add an options page. You knew that I had to. Maybe... someday...
     $this->add_plugin_options_page();
 
   }
 
   private function add_plugin_options_page() {
 
-    // Coming soon... maybe... someday.
-
+    Container::make( 'theme_options', self::$settings['data']['Name'] )
+      ->set_page_parent('tools.php')
+      ->add_tab( __('General'), array(
+        Field::make('checkbox', self::$prefix.'enabled', __('Load Carbon Fields'))->set_option_value(1)
+          ->help_text(__('Currently, this checkbox does nothing.'))
+      ));
   }
 
 }
