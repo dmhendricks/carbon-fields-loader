@@ -24,7 +24,18 @@ I'm not going to do a release until this thing isn't terrible.
 
 ## How do I use it correctly with my plugin/theme?
 
-TODO
+If you want to use this plugin to load Carbon Fields for use with your plugin or theme, you would probably want to do something like this:
+
+```
+function load_my_magic() {
+   // Do something swell
+}
+
+add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
+add_action( 'carbon_fields_loaded', 'load_my_magic' );
+```
+
+Of course, you should be using namespaces and classes, but whatev.
 
 ## Frequently Asked Questions
 
