@@ -1,13 +1,13 @@
 === Carbon Fields Loader ===
 Contributors: hendridm
-Tags: custom, field, custom field, advanced, repeater, post, type, text, textarea, file, image, rich text, wysiwyg, select, dropdown, checkbox, radio, association, relationship, map, taxonomy, term, user, comment, option, options, widget, simple fields, magic fields, more fields, post meta, term meta, user meta, comment meta, theme options, custom widget, nested fieldsvisibility,multisite,network,plugins,hide,updates
+Tags: custom, fields, custom fields, advanced, repeater, post, type, text, textarea, file, image, rich text, wysiwyg, select, dropdown, checkbox, radio, association, relationship, map, taxonomy, term, user, comment, option, options, widget, simple fields, magic fields, more fields, post meta, term meta, user meta, comment meta, theme options, custom widget, nested fieldsvisibility,multisite,network,plugins,hide,updates
 Plugin URI: https://github.com/dmhendricks/carbon-fields-loader/
 Requires at least: 4.0
 Tested up to: 4.8
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A simple loader for the Carbon Fields framework.
+A simple loader plugin for the Carbon Fields framework.
 
 == Description ==
 This is a simple plugin used to load the latest _release_ version of [Carbon Fields](http://carbonfields.net/).
