@@ -8,8 +8,6 @@ This plugin is **not** supported by [htmlBurger](https://htmlburger.com), the ma
 
 Currently, this *simply loads the Carbon Fields framework* and nothing more.
 
-I'm not going to do a release until this thing isn't terrible.
-
 ## Requirements
 
 (I haven't actually tested this yet - I just created this repo.)
