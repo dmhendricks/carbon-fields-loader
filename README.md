@@ -55,11 +55,10 @@ function verify_dependencies( $deps ) {
   }
 
   if($error) {
-	add_action( 'admin_notices', function() {
-		$class = 'notice notice-error';
-		$message = __( 'Irks! An error has occurred.', 'sample-text-domain' );
+    add_action( 'admin_notices', function() {
+      $class = 'notice notice-error';
 
-		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+      printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $error ) );
     });
   }
 
