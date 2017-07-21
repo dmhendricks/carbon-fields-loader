@@ -2,7 +2,7 @@
 
 This is a simple plugin used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
 
-This plugin is **not** officially supported by htmlBurger, the makers of Carbon Fields.
+This plugin is **not** supported by [htmlBurger](https://htmlburger.com), the makers of Carbon Fields.
 
 **What is the point?** None really, unless you want to run a different version of Carbon Fields than what is on the wordpress.org repo.
 
@@ -15,19 +15,19 @@ I'm not going to do a release until this thing isn't terrible.
 (I haven't actually tested this yet - I just created this repo.)
 
 * WordPress 4.0 or higher
-* PHP 5.3.29 or higher
+* PHP 5.3 or higher
 
 ## How do I use it correctly with my plugin/theme?
 
 If you want to use this plugin to load Carbon Fields for use with your plugin or theme, you would probably want to do something like this:
 
 ```
-function load_my_magic() {
-   // Do something swell
+function do_plugin_logic() {
+   // Load plugin logic
 }
 
 add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
-add_action( 'carbon_fields_loaded', 'load_my_magic' );
+add_action( 'carbon_fields_loaded', 'do_plugin_logic' );
 ```
 
 ## Version Checking
@@ -37,13 +37,6 @@ Since it is possible that an older version of the plugin may be installed and/or
 **Quick example:**
 
 ```
-add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
-add_action( 'carbon_fields_loaded', 'load_my_magic' );
-
-if(verify_dependencies(['carbon_fields' => '2.0.0'])) {
-   // Execute my super-awesome plugin logic
-}
-
 function verify_dependencies( $deps ) {
   // Check if outdated version of Carbon Fields loaded
   $error = false;
@@ -64,6 +57,15 @@ function verify_dependencies( $deps ) {
 
   return !$error;
 }
+
+function do_plugin_logic() {
+  if(verify_dependencies(['carbon_fields' => '2.0.0'])) {
+    // Load plugin logic
+  }
+}
+
+add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
+add_action( 'carbon_fields_loaded', 'do_plugin_logic' );
 ```
 
 ## Frequently Asked Questions
