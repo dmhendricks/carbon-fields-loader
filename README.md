@@ -30,6 +30,43 @@ add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
 add_action( 'carbon_fields_loaded', 'load_my_magic' );
 ```
 
+## Version Checking
+
+Since it is possible that an older version of the plugin may be installed and/or loaded as a dependency in a theme or plugin, you may wish to do version checking if your code requires a newer version.
+
+**Quick example:**
+
+```
+add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
+add_action( 'carbon_fields_loaded', 'load_my_magic' );
+
+if(verify_dependencies(['carbon_fields' => '2.0.0'])) {
+   // Execute my super-awesome plugin logic
+}
+
+function verify_dependencies( $deps ) {
+  // Check if outdated version of Carbon Fields loaded
+  $error = false;
+
+  if(!defined('\\Carbon_Fields\\VERSION')) {
+    $error = '<strong>' . __('My Plugin Name', 'my-text-domain') . ':</strong> ' . __('A fatal error occurred while trying to load dependencies.', 'my-text-domain');
+  } else if( version_compare( \Carbon_Fields\VERSION, $deps['carbon_fields'], '<' ) ) {
+    $error = '<strong>' . __('My Plugin Name', 'my-text-domain') . '] . ':</strong> ' . __('Danger, Will Robinson! An outdated version of Carbon Fields has been loaded: ' . \Carbon_Fields\VERSION) . ' (&gt;= ' . $deps['carbon_fields'], 'my-text-domain') . ' ' . __('required', 'my-text-domain') . ')';
+  }
+
+  if($error) {
+	add_action( 'admin_notices', function() {
+		$class = 'notice notice-error';
+		$message = __( 'Irks! An error has occurred.', 'sample-text-domain' );
+
+		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+    });
+  }
+
+  return !$error;
+}
+```
+
 ## Frequently Asked Questions
 
 *Q: I get a fatal error when I activate this plugin. What do I do?*
@@ -46,5 +83,5 @@ A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
 ## Changelog
 
-**2.0.3 (master)**
+**2.0.3**
 * Initial commit
