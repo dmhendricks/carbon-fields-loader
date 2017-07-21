@@ -6,13 +6,11 @@ class Plugin {
 
   public static $settings;
   public static $textdomain;
-  public static $prefix;
 
   public function __construct($_settings) {
 
     // Set text domain and option prefix
     self::$textdomain = $_settings['data']['TextDomain'];
-    self::$prefix     = $_settings['prefix'];
     self::$settings   = $_settings;
 
     // Initialize Carbon Fields and verify dependencies

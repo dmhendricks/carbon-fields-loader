@@ -34,7 +34,6 @@
 if(!defined('WPINC')) die();
 
 require( __DIR__ . '/vendor/autoload.php' );
-//require_once( ABSPATH . WPINC . '/pluggable.php' );
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 // Initialize plugin - Change to use your own namespace
@@ -42,9 +41,6 @@ new \TwoLabNet\CarbonFieldsLoader\Plugin(array(
 	'data' => get_plugin_data(__FILE__),
 	'path' => realpath(plugin_dir_path(__FILE__)).DIRECTORY_SEPARATOR,
 	'url' => plugin_dir_url(__FILE__),
-	'plugin_loader' => implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __FILE__), -2, 2, true)),
-	'prefix' => 'cfloader_',
-	'menu_title' => __('Carbon Fields'),
-	'deps' => array('carbon_fields' => '2.0.0')
+	'deps' => array( 'carbon_fields' => '2.0.0' )
 ));
 ?>

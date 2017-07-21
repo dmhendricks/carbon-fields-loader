@@ -1,4 +1,4 @@
-# Carbon Fields Loader WordPress Plugin
+# Carbon Fields Loader Plugin for WordPress
 
 This is a simple plugin used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
 
@@ -8,16 +8,27 @@ This plugin is **not** officially supported by htmlBurger, the makers of Carbon 
 
 Currently, this *simply loads the Carbon Fields framework* and nothing more.
 
-### Requirements
+I'm not going to do a release until this thing isn't terrible.
+
+## Requirements
 
 (I haven't actually tested this yet - I just created this repo.)
 
 * WordPress 4.0 or higher
-* PHP 5.3.29 or higher (although if you're running <5.5 I probably won't care)
+* PHP 5.3.29 or higher
 
 ## How do I use it correctly with my plugin/theme?
 
-TODO
+If you want to use this plugin to load Carbon Fields for use with your plugin or theme, you would probably want to do something like this:
+
+```
+function load_my_magic() {
+   // Do something swell
+}
+
+add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
+add_action( 'carbon_fields_loaded', 'load_my_magic' );
+```
 
 ## Frequently Asked Questions
 
