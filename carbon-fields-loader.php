@@ -6,7 +6,7 @@
  * Description:       A loader plugin for the Carbon Fields framework.
  * Version:           2.0.3
  * Author:            Daniel M. Hendricks
- * Author URI:        https://github.com/dmhendricks/carbon-fields-loader/
+ * Author URI:        https://www.danhendricks.com
  * Text Domain:       cfloader
  * Domain Path:       /languages
  * License:           GPL-2.0
