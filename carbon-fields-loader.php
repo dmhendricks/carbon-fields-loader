@@ -41,6 +41,7 @@ new \TwoLabNet\CarbonFieldsLoader\Plugin(array(
 	'data' => get_plugin_data(__FILE__),
 	'path' => realpath(plugin_dir_path(__FILE__)).DIRECTORY_SEPARATOR,
 	'url' => plugin_dir_url(__FILE__),
-	'deps' => array( 'php' => '5.3' )
+	'deps' => array( 'php' => '5.3', 'carbon_fields' => '2.0.0' ),
+	'plugin_file' => plugin_basename(__FILE__)
 ));
 ?>
