@@ -15,6 +15,37 @@ Currently, this *simply loads the Carbon Fields framework* and nothing more.
 * WordPress 4.0 or higher
 * PHP 5.3 or higher
 
+## Options
+
+You can define certain constants in `wp-config.php` to affect the appearanc of this plugin on the Plugins page:
+
+##### To *hide* the plugin from the Plugins page:
+
+```
+define( 'CFL_HIDE_PLUGIN', true );
+```
+
+##### To remove *all* action links from the Plugins page (all versions of PHP):
+
+```
+// Removes ALL action links
+define( 'CFL_REMOVE_PLUGIN_LINKS', true );
+```
+
+##### To remove the *Deactivate* action link from the plugins page (all versions of PHP):
+
+```
+// Removes the 'Deactivate' action link
+define( 'CFL_REMOVE_PLUGIN_LINKS', 'deactivate' );
+```
+
+##### To remove multiple/specific action links from the plugins page (PHP >= 7.0):
+
+```
+// Removes the 'Deactivate' and 'Edit' action links
+define( 'CFL_REMOVE_PLUGIN_LINKS', ['deactivate', 'edit'] );
+```
+
 ## How do I use it correctly with my plugin/theme?
 
 If you want to use this plugin to load Carbon Fields for use with your plugin or theme, you would probably want to do something like this:
@@ -81,6 +112,11 @@ A: If you just want to pull the latest release version of Carbon Fields from the
 A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
 ## Changelog
+
+**2.0.4**
+* Updated Carbon Fields framework
+* Added constants: `CFL_HIDE_PLUGIN` and `CFL_REMOVE_PLUGIN_LINKS`
+* Added PHP version check
 
 **2.0.3**
 * Initial commit
