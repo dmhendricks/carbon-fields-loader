@@ -3,8 +3,8 @@ Contributors: hendridm
 Tags: custom, fields, custom fields, advanced, repeater, post, type, text, textarea, file, image, rich text, wysiwyg, select, dropdown, checkbox, radio, association, relationship, map, taxonomy, term, user, comment, option, options, widget, simple fields, magic fields, more fields, post meta, term meta, user meta, comment meta, theme options, custom widget, nested fieldsvisibility,multisite,network,plugins,hide,updates
 Plugin URI: https://github.com/dmhendricks/carbon-fields-loader/
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 2.0.3
+Tested up to: 4.8
+Stable tag: 2.0.4
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,5 +49,10 @@ If you just want to pull the latest release version of Carbon Fields from the re
 
 == Changelog ==
 
-= 2.0.3 =
-Initial Release
+**2.0.4**
+* Updated Carbon Fields framework
+* Added constants: `CFL_HIDE_PLUGIN` and `CFL_REMOVE_PLUGIN_LINKS`
+* Added PHP version check
+
+**2.0.3**
+* Initial Release
