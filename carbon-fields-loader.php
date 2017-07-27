@@ -4,7 +4,7 @@
  * Plugin Name:       Carbon Fields Loader
  * Plugin URI:        https://github.com/dmhendricks/carbon-fields-loader/
  * Description:       A loader plugin for the Carbon Fields framework.
- * Version:           2.0.3
+ * Version:           2.0.4
  * Author:            Daniel M. Hendricks
  * Author URI:        https://www.danhendricks.com
  * Text Domain:       cfloader
@@ -41,6 +41,6 @@ new \TwoLabNet\CarbonFieldsLoader\Plugin(array(
 	'data' => get_plugin_data(__FILE__),
 	'path' => realpath(plugin_dir_path(__FILE__)).DIRECTORY_SEPARATOR,
 	'url' => plugin_dir_url(__FILE__),
-	'deps' => array( 'carbon_fields' => '2.0.0' )
+	'deps' => array( 'php' => '5.3' )
 ));
 ?>
