@@ -18,7 +18,7 @@ This plugin is **_not_** supported by [htmlBurger](https://htmlburger.com) and t
 
 Because we don't like "admins" monkeying around and disabling (or touching) things, options are set with constants in `wp-config.php`.
 
-#### PHP 5.3 and Higher
+### PHP 5.3 and Higher
 
 ```
 define( 'CFL_MIN_VERSION', '2.0.3' );
@@ -53,7 +53,7 @@ define( 'CFL_DESCRIPTION_NOTICE', '<strong>This plugin is required for the site 
 
 Allows you to append text to this plugin's description in Plugins > Installed Plugins.
 
-#### PHP 7.0 and Higher
+### PHP 7.0 and Higher
 
 You may use an array for the `CFL_REMOVE_PLUGIN_LINKS` constant:
 
@@ -69,7 +69,7 @@ However, since you're running a [non-legacy](https://en.wikipedia.org/wiki/PHP#R
 define( 'CFL_OPTIONS', array( ... ) );
 ```
 
-##### Parameters
+#### Parameters
 
 * `min_version` (string) - Set the minimum supported loaded version of Carbon Fields. This is short form if you don't want to use `deps`.
 * `deps` (array) - Set minimum versions for PHP (`'php'`) and Carbon Fields (`'carbon_fields'`). **NB!** The minimum version of Carbon Fields set in `deps` takes precedence over the `min_version` setting. If you have boths set, this value will be used.
@@ -78,7 +78,7 @@ define( 'CFL_OPTIONS', array( ... ) );
 * `disable_updates` (bool) - If set to true, disables update notifications for **_this_** plugin only.
 * `description_notice` (string) - Allows you to append text to this plugin's description in the same way that defining `CFL_DESCRIPTION_NOTICE` does.
 
-##### Examples
+#### Examples
 
 ```
 define( 'CFL_OPTIONS' , ['min_version' => '2.0.0', 'hide_plugins' => true ] );
