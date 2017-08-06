@@ -1,122 +1,143 @@
 # Carbon Fields Loader Plugin for WordPress
 
-This is a simple plugin used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
+This is a simple plugin that may be used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
 
-This plugin is **not** supported by [htmlBurger](https://htmlburger.com), the makers of Carbon Fields.
+This plugin is **_not_** supported by [htmlBurger](https://htmlburger.com) and team, the creators and maintaners of Carbon Fields. The author of this loader plugin has no affiliation with htmlBurder and the Carbon Fields team.
 
-**What is the point?** None really, unless you want to run a different version of Carbon Fields than what is on the wordpress.org repo.
-
-Currently, this *simply loads the Carbon Fields framework* and nothing more.
+* [Official Carbon Fields Framework Documentation](https://carbonfields.net/docs/)
+* [Usage Examples for this Loader Plugin](https://github.com/dmhendricks/carbon-fields-loader/wiki/Documentation)
 
 ## Requirements
 
-(I haven't actually tested this yet - I just created this repo.)
-
 * WordPress 4.0 or higher
-* PHP 5.3 or higher
+* PHP 5.3 or higher (using the `CFL_OPTIONS` constant requires PHP 7 or higher)
+
+**NB!** This plugin will deactivate itself if a legacy version Carbon Fields is loaded (either via plugin or as a dependency of a plugin/theme). Legacy versions and current releases of Carbon Fields are not compatible and may not be concurrently loaded.
 
 ## Options
 
-You can define certain constants in `wp-config.php` to affect the appearanc of this plugin on the Plugins page:
+Because we don't like "admins" monkeying around and disabling (or touching) things, options are set with constants in `wp-config.php`.
 
-##### To *hide* the plugin from the Plugins page:
+#### PHP 5.3 and Higher
+
+```
+define( 'CFL_MIN_VERSION', '2.0.3' );
+```
+
+Sets the minimum supported loaded version of Carbon Fields to >=2.0.3.
+
+```
+define( 'CFL_DISABLE_UPDATE_NOTIFICATION', true );
+```
+
+Disables update notifications for this plugin. (Only relevant if [GitHub Updater](https://github.com/afragen/github-updater) is also installed.) This can be useful if you use GitHub Updater for other plugins but don't want your code to break because somebody clicked "Update" without testing first.
+
+```
+define( 'CFL_REMOVE_PLUGIN_ACTIONS', 'deactivate' );
+```
+
+Removes the "Deactivate" action link for this plugin from Plugins > Installed Plugins.
+* Set `CFL_REMOVE_PLUGIN_ACTIONS` to `true` to remove **_all_** action links.
+* Alternatively, you may also set `CFL_DISABLE_DEACTIVATE` to true to remove the _Deactivate_ action link only.
 
 ```
 define( 'CFL_HIDE_PLUGIN', true );
+define( 'CFL_HIDE_GITHUB_UPDATER', true );
 ```
 
-##### To remove *all* action links from the Plugins page (all versions of PHP):
+Hides this plugin and GitHub Updater from Plugins > Installed Plugins in WP Admin.
 
 ```
-// Removes ALL action links
-define( 'CFL_REMOVE_PLUGIN_LINKS', true );
+define( 'CFL_DESCRIPTION_NOTICE', '<strong>This plugin is required for the site to work!</strong>' );
 ```
 
-##### To remove the *Deactivate* action link from the plugins page (all versions of PHP):
+Allows you to append text to this plugin's description in Plugins > Installed Plugins.
+
+#### PHP 7.0 and Higher
+
+You may use an array for the `CFL_REMOVE_PLUGIN_LINKS` constant:
 
 ```
-// Removes the 'Deactivate' action link
-define( 'CFL_REMOVE_PLUGIN_LINKS', 'deactivate' );
-```
-
-##### To remove multiple/specific action links from the plugins page (PHP >= 7.0):
-
-```
-// Removes the 'Deactivate' and 'Edit' action links
 define( 'CFL_REMOVE_PLUGIN_LINKS', ['deactivate', 'edit'] );
 ```
 
-## How do I use it correctly with my plugin/theme?
+This removes both the 'Deactivate' and 'Edit' action links from Plugins > Installed Plugins.
 
-If you want to use this plugin to load Carbon Fields for use with your plugin or theme, you would probably want to do something like this:
-
-```
-function do_plugin_logic() {
-   // Load plugin logic
-}
-
-add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
-add_action( 'carbon_fields_loaded', 'do_plugin_logic' );
-```
-
-## Version Checking
-
-Since it is possible that an older version of the plugin may be installed and/or loaded as a dependency in a theme or plugin, you may wish to do version checking if your code requires a newer version.
-
-**Quick example:**
+However, since you're running a [non-legacy](https://en.wikipedia.org/wiki/PHP#Release_history) version of PHP, you may be more concise.
 
 ```
-function verify_dependencies( $deps ) {
-  // Check if outdated version of Carbon Fields loaded
-  $error = false;
-
-  if(!defined('\\Carbon_Fields\\VERSION')) {
-    $error = '<strong>' . __('My Plugin Name', 'my-text-domain') . ':</strong> ' . __('A fatal error occurred while trying to load dependencies.', 'my-text-domain');
-  } else if( version_compare( \Carbon_Fields\VERSION, $deps['carbon_fields'], '<' ) ) {
-    $error = '<strong>' . __('My Plugin Name', 'my-text-domain') . '] . ':</strong> ' . __('Danger, Will Robinson! An outdated version of Carbon Fields has been loaded: ' . \Carbon_Fields\VERSION) . ' (&gt;= ' . $deps['carbon_fields'], 'my-text-domain') . ' ' . __('required', 'my-text-domain') . ')';
-  }
-
-  if($error) {
-    add_action( 'admin_notices', function() {
-      $class = 'notice notice-error';
-
-      printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $error ) );
-    });
-  }
-
-  return !$error;
-}
-
-function do_plugin_logic() {
-  if(verify_dependencies(['carbon_fields' => '2.0.0'])) {
-    // Load plugin logic
-  }
-}
-
-add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
-add_action( 'carbon_fields_loaded', 'do_plugin_logic' );
+define( 'CFL_OPTIONS', array( ... ) );
 ```
+
+##### Parameters
+
+* `min_version` (string) - Set the minimum supported loaded version of Carbon Fields. This is short form if you don't want to use `deps`.
+* `deps` (array) - Set minimum versions for PHP (`'php'`) and Carbon Fields (`'carbon_fields'`). **NB!** The minimum version of Carbon Fields set in `deps` takes precedence over the `min_version` setting. If you have boths set, this value will be used.
+* `hide_plugins` (mixed) - If set to `true` (bool), hides this plugin *and* GitHub Updater. Array `['carbon-fields-loader', 'github-updater']` or string `'carbon-fields-loader'` may be used selectively choose.
+* `remove_actions` (mixed) - If set to `true` (bool), removes *all* action links (ie, "Deactivate" and "Edit"). Array `['deactivate', 'edit']` ("Deactivate" and "Edit" links) or string `'deactivate'` ("Deactivate" link only) may be used to selectively choose.
+* `disable_updates` (bool) - If set to true, disables update notifications for **_this_** plugin only.
+* `description_notice` (string) - Allows you to append text to this plugin's description in the same way that defining `CFL_DESCRIPTION_NOTICE` does.
+
+##### Examples
+
+```
+define( 'CFL_OPTIONS' , ['min_version' => '2.0.0', 'hide_plugins' => true ] );
+```
+
+* Carbon Fields 2.0.0 or higher must be loaded, else notice is displayed.
+* This plugin *and* [GitHub Updater](https://github.com/afragen/github-updater) will be hidden from Plugins > Installed Plugins.
+
+```
+define( 'CFL_OPTIONS' , ['deps' => [ 'carbon_fields' => '2.0.3', 'php' => '5.3.29' ], 'hide_plugins' => ['carbon-fields-loader', 'github-updater'], 'disable_updates' => true ] );
+````
+
+* Carbon Fields >=2.0.3 and >=PHP 5.3.29 must be loaded, else notice is displayed.
+* This plugin and GitHub Updater are hidden from Plugins > Installed Plugins.
+* Update notifications are disabled for this plugin. (If [GitHub Updater](https://github.com/afragen/github-updater) is installed.)
+
+```
+define( 'CFL_OPTIONS' , ['min_version' => '2.0.4', 'hide_plugins' => 'carbon-fields-loader', 'remove_actions' => ['deactivate', 'edit'], 'disable_updates' => true ] );
+```
+
+* Carbon Fields 2.0.4 or higher must be loaded, else notice is displayed.
+* This plugin (but not GitHub Updater) is hidden from Plugins > Installed Plugins.
+* Removes "Deactivate" and "Edit" action links from this plugin.
+* Update notifications are disabled for this plugin.
 
 ## Frequently Asked Questions
 
-*Q: I get a fatal error when I activate this plugin. What do I do?*
+**_Q: I get a fatal error when I activate this plugin. What do I do?_**
 
-A: This may occur when you are running an outdated version of the Carbon Fields plugin and/or have a plugin/theme that includes and outdated version as a dependency. The only fix is the delete this one or update the plugins/themes that require it.
+A: This may occur when you are running an outdated version of the Carbon Fields plugin and/or have a plugin/theme that includes and outdated version as a dependency. Although this plugin does appropriate version checking, other plugins/themes may not. The only fix is the delete this one or update the plugins/themes that require it.
 
-*Q: How do I update this thing to use a newer version or a different branch?*
+**_Q: How do I properly use this loader with my plugin/theme?_**
+
+Please see the wiki for [usage examples](https://github.com/dmhendricks/carbon-fields-loader/wiki/Documentation#usage-with-plugintheme).
+
+**_Q: How do I update this plugin to use a newer version or a different branch of the Carbon Fields Framework?_**
 
 A: If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": ">=2.0.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
 
-*Q: How can I get auto-updates?*
+**_Q: How can I get auto-updates?_**
 
 A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
-## Changelog
+## Change Log
 
-**2.0.4**
-* Updated Carbon Fields framework
-* Added constants: `CFL_HIDE_PLUGIN` and `CFL_REMOVE_PLUGIN_LINKS`
-* Added PHP version check
+#### Branch: master (unreleased)
+* Fixed several translation issues
+* Greatly improved dependency checking
+* Added configurable constants:
+	* `CFL_OPTIONS` (PHP 7+ only)
+	* `CFL_DISABLE_UPDATE_NOTIFICATION`
+	* `CFL_HIDE_GITHUB_UPDATER`
+	* `CFL_DISABLE_DEACTIVATE`
+	* `CFL_DESCRIPTION_NOTICE`
+* Renamed `CFL_REMOVE_PLUGIN_LINKS` to `CFL_REMOVE_PLUGIN_ACTIONS`
+* Added min/max WordPress tested version compatibility to plugin header
+* Adjusted `readme.txt` formatting; updated version/content
+* Fixed bug with `show_notice()` breaking frontend when exception occurs.
 
-**2.0.3**
-* Initial commit
+#### Releases
+
+Changes related to each release are maintained on the [Releases](https://github.com/dmhendricks/carbon-fields-loader/releases) page.

@@ -3,8 +3,8 @@ namespace TwoLabNet\CarbonFieldsLoader;
 
 class Plugin {
 
-  public static $settings;
-  public static $textdomain;
+  protected static $settings;
+  protected static $textdomain;
 
   public function __construct($_settings) {
 
@@ -12,51 +12,120 @@ class Plugin {
     self::$textdomain = $_settings['data']['TextDomain'];
     self::$settings   = $_settings;
 
-    // Initialize Carbon Fields and verify dependencies
-    add_action( 'plugins_loaded', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
-    add_action( 'setup_theme', array( $this, 'load_plugin' ) );
+    // Get plugin option constants from wp-config.php, if set
+    Settings::set_options();
+
+    // Verify dependecies and load plugin logic
+    register_activation_hook( self::$settings['plugin_file'], array( $this, 'activate' ) );
+    add_action( 'plugins_loaded', array( $this, 'init' ) );
 
   }
 
+  /**
+    * Check plugin dependencies on activation.
+    *
+    * @since 2.0.5
+    */
+  public function activate() {
+
+    $dependency_check = $this->verify_dependencies( true, array( 'activate' => true, 'echo' => false ) );
+    if( $dependency_check !== true ) die( $dependency_check );
+
+  }
+
+  /**
+    * Initialize Carbon Fields and load plugin logic
+    *
+    * @since 2.0.0
+    */
+  public function init() {
+
+    add_action( 'after_setup_theme', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
+
+    if( $this->verify_dependencies( 'carbon_fields' ) === true ) {
+      add_action( 'carbon_fields_loaded', array( $this, 'load_plugin' ));
+    }
+
+  }
+
+  /**
+    * Load plugin classes
+    *
+    * @since 2.0.0
+    */
   public function load_plugin() {
-    if(!$this->verify_dependencies()) return;
 
-    // Run extra loader plugin logic
-    new Core();
+    if( !$this->verify_dependencies( 'carbon_fields' ) ) return;
 
-  }
-
-  /**
-    * Verify dependencies (such as Carbon Fields & PHP versions)
-    */
-  public function verify_dependencies() {
-
-    // Check if outdated version of Carbon Fields loaded
-    $plugin_name = self::$settings['data']['Name'];
-    $error = null;
-
-    if( version_compare( phpversion(), self::$settings['deps']['php'], '<' ) ) {
-      $error = '<strong>' . $plugin_name . ':</strong> ' . __('PHP version ' . self::$settings['deps']['php'] . ' required (' . phpversion() . ' detected).');
-    } else if( !defined('\\Carbon_Fields\\VERSION') ) {
-      $error = '<strong>' . $plugin_name . ':</strong> ' . __('A fatal error occurred while trying to initialize plugin.');
-    } else if( version_compare( \Carbon_Fields\VERSION, self::$settings['deps']['carbon_fields'], '<' ) ) {
-      $error = '<strong>' . $plugin_name . ':</strong> ' . __('Unable to load. An outdated version of Carbon Fields has been loaded:' . ' ' . \Carbon_Fields\VERSION) . ' (&gt;= '.self::$settings['deps']['carbon_fields'] . ' ' . __('required') . ')';
-    }
-
-    if($error) $this->show_notice($error, 'error', false);
-    return !$error;
+    // Load plugin configuration logic
+    new Settings();
 
   }
 
   /**
-    * Helper function to display a notice in the WP Admin
+    * Function to verify dependencies, such as if an outdated version of Carbon
+    *    Fields is detected.
+    *
+    * @param string|array|bool $deps A string (single) or array of deps to check. `true`
+    *    checks all defined dependencies.
+    * @param array $args An array of arguments.
+    * @return bool|string Result of dependency check. Returns bool if $args['echo']
+    *    is false, string if true.
+    * @since 2.0.5
     */
-  private function show_notice($msg, $type = 'error', $is_dismissible = false) {
+  private function verify_dependencies( $deps = true, $args = array() ) {
 
-    if( is_admin() ) {
-      $class = 'notice notice-' . $type . ( $is_dismissible ? ' is-dismissible' : '' );
-      printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $msg );
+    if( is_bool( $deps ) && $deps ) $deps = self::$settings['deps'];
+    if( !is_array( $deps ) ) $deps = array( $deps => self::$settings['deps'][$deps] );
+
+    $args = Utils::set_default_atts( array(
+      'echo' => true,
+      'activate' => true
+    ), $args);
+
+    $notices = array();
+
+    foreach( $deps as $dep => $version ) {
+
+      switch( $dep ) {
+
+        case 'php':
+
+          if( version_compare( phpversion(), $version, '<' ) ) {
+            $notices[] = __( 'This plugin is not supported on versions of PHP below', self::$textdomain ) . ' ' . self::$settings['deps']['php'] . '.' ;
+          }
+          break;
+
+        case 'carbon_fields':
+
+          //if( defined('\\Carbon_Fields\\VERSION') || ( defined('\\Carbon_Fields\\VERSION') && version_compare( \Carbon_Fields\VERSION, $version, '<' ) ) ) {
+          if( !$args['activate'] && !defined('\\Carbon_Fields\\VERSION') ) {
+            $notices[] = __( 'An unknown error occurred while trying to load the Carbon Fields framework.', self::$textdomain );
+          } else if ( defined('\\Carbon_Fields\\VERSION') && version_compare( \Carbon_Fields\VERSION, $version, '<' ) ) {
+            $notices[] = __( 'An outdated version of Carbon Fields has been detected:', self::$textdomain ) . ' ' . \Carbon_Fields\VERSION . ' (&gt;= '.self::$settings['deps']['carbon_fields'] . ' ' . __( 'required', self::$textdomain ) . ').' . ' <strong>' . self::$settings['data']['Name'] . '</strong> ' . __( 'deactivated.', self::$textdomain ) ;
+          }
+          break;
+
+        }
+
     }
+
+    if( $notices ) {
+
+      deactivate_plugins( self::$settings['plugin_file'] );
+
+      $notices = '<ul><li>' . implode( "</li>\n<li>", $notices ) . '</li></ul>';
+
+      if( $args['echo'] ) {
+        Utils::show_notice($notices, self::$textdomain, 'error', false);
+        return false;
+      } else {
+        return $notices;
+      }
+
+    }
+
+    return !$notices;
 
   }
 
