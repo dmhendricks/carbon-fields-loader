@@ -5,7 +5,7 @@ This is a simple plugin that may be used to load the latest **_release_** versio
 This plugin is **_not_** supported by [htmlBurger](https://htmlburger.com) and team, the creators and maintaners of Carbon Fields. The author of this loader plugin has no affiliation with htmlBurder and the Carbon Fields team.
 
 * [Official Carbon Fields Framework Documentation](https://carbonfields.net/docs/)
-* [Usage Examples for this Loader Plugin](https://github.com/dmhendricks/carbon-fields-loader/wiki/Documentation)
+* [Usage Examples for this Loader Plugin](https://github.com/dmhendricks/carbon-fields-loader/wiki/)
 
 ## Requirements
 
@@ -112,7 +112,7 @@ A: This may occur when you are running an outdated version of the Carbon Fields 
 
 **_Q: How do I properly use this loader with my plugin/theme?_**
 
-Please see the wiki for [usage examples](https://github.com/dmhendricks/carbon-fields-loader/wiki/Documentation#usage-with-plugintheme).
+Please see the wiki for [usage examples](https://github.com/dmhendricks/carbon-fields-loader/wiki#usage-with-plugintheme).
 
 **_Q: How do I update this plugin to use a newer version or a different branch of the Carbon Fields Framework?_**
 
