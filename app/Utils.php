@@ -60,7 +60,7 @@ class Utils extends Plugin {
     * @link https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/shortcodes.php#L540 Original source
     * @since 2.0.5
     */
-  public function set_default_atts( $pairs, $atts ) {
+  public static function set_default_atts( $pairs, $atts ) {
 
     $atts = (array)$atts;
     $result = array();
