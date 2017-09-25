@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb2dab31f83e42dac8e34f44ff24b6ad6
+class ComposerStaticInitdac455cb5fad12e6e56d6d036e4bfe04
 {
     public static $prefixLengthsPsr4 = array (
         'T' => 
@@ -33,22 +33,11 @@ class ComposerStaticInitb2dab31f83e42dac8e34f44ff24b6ad6
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'C' => 
-        array (
-            'Composer\\CustomDirectoryInstaller' => 
-            array (
-                0 => __DIR__ . '/..' . '/mnsami/composer-custom-directory-installer/src',
-            ),
-        ),
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb2dab31f83e42dac8e34f44ff24b6ad6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb2dab31f83e42dac8e34f44ff24b6ad6::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb2dab31f83e42dac8e34f44ff24b6ad6::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdac455cb5fad12e6e56d6d036e4bfe04::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdac455cb5fad12e6e56d6d036e4bfe04::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
