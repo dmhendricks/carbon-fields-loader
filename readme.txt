@@ -4,8 +4,8 @@ Tags: custom, fields, custom fields, advanced, repeater, post, type, text, texta
 Plugin URI: https://github.com/dmhendricks/carbon-fields-loader/
 Donate link: https://paypal.me/danielhendricks
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 2.0.4
+Tested up to: 4.8.2
+Stable tag: 2.1.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,20 +48,3 @@ A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
 #### Q. How do I update this thing to use a newer version or a different branch?
 If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": ">=2.0.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
-
-## Changelog
-
-#### master
-
-* Added ability to define minimum PHP (default: 5.3) and Carbon Fields (default: 2.0.0) versions
-* Added `CFL_OPTIONS` (PHP 7+), `CFL_DISABLE_UPDATE_NOTIFICATION` and `CFL_MIN_VERSION`
-* Added min/max WordPress tested version compatibility to plugin header
-* Fixed `readme.txt` formatting; updated versions/contents
-
-#### 2.0.4 - 2017-07-28
-* Updated Carbon Fields framework
-* Added constants: `CFL_HIDE_PLUGIN` and `CFL_REMOVE_PLUGIN_LINKS`
-* Added PHP version check
-
-#### 2.0.3 - 2017-07-21
-* Initial Release

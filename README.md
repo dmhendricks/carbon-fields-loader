@@ -137,6 +137,7 @@ A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 * Added min/max WordPress tested version compatibility to plugin header
 * Adjusted `readme.txt` formatting; updated version/content
 * Fixed bug with `show_notice()` breaking frontend when exception occurs.
+* Updated Carbon Fields framework to 2.1.0
 
 #### Releases
 
