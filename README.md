@@ -2,7 +2,7 @@
 
 This is a simple plugin that may be used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
 
-This plugin is **_not_** supported by [htmlBurger](https://htmlburger.com) and team, the creators and maintaners of Carbon Fields. The author of this loader plugin has no affiliation with htmlBurder and the Carbon Fields team.
+This plugin is **_not_** supported or maintained by [htmlBurger](https://htmlburger.com) and team, the creators and maintaners of [Carbon Fields](https://carbonfields.net/). The author of this loader plugin has no affiliation with htmlBurder or the Carbon Fields team.
 
 * [Official Carbon Fields Framework Documentation](https://carbonfields.net/docs/)
 * [Usage Examples for this Loader Plugin](https://github.com/dmhendricks/carbon-fields-loader/wiki/)
@@ -12,7 +12,7 @@ This plugin is **_not_** supported by [htmlBurger](https://htmlburger.com) and t
 * WordPress 4.0 or higher
 * PHP 5.3 or higher (using the `CFL_OPTIONS` constant requires PHP 7 or higher)
 
-**NB!** This plugin will deactivate itself if a legacy version Carbon Fields is loaded (either via plugin or as a dependency of a plugin/theme). Legacy versions and current releases of Carbon Fields are not compatible and may not be concurrently loaded.
+**Note:** This plugin will deactivate itself if a legacy version Carbon Fields is loaded (either via plugin or as a dependency of a plugin/theme). Legacy versions and current releases of Carbon Fields are not compatible and may not be concurrently loaded.
 
 ## Options
 
@@ -21,10 +21,10 @@ Because we don't like "admins" monkeying around and disabling (or touching) thin
 ### PHP 5.3 and Higher
 
 ```
-define( 'CFL_MIN_VERSION', '2.0.3' );
+define( 'CFL_MIN_VERSION', '2.1.0' );
 ```
 
-Sets the minimum supported loaded version of Carbon Fields to >=2.0.3.
+Sets the minimum supported loaded version of Carbon Fields to >=2.1.0.
 
 ```
 define( 'CFL_DISABLE_UPDATE_NOTIFICATION', true );
@@ -81,25 +81,25 @@ define( 'CFL_OPTIONS', array( ... ) );
 #### Examples
 
 ```
-define( 'CFL_OPTIONS' , ['min_version' => '2.0.0', 'hide_plugins' => true ] );
+define( 'CFL_OPTIONS' , ['min_version' => '2.1.0', 'hide_plugins' => true ] );
 ```
 
-* Carbon Fields 2.0.0 or higher must be loaded, else notice is displayed.
+* Carbon Fields 2.1.0 or higher must be loaded, else notice is displayed.
 * This plugin *and* [GitHub Updater](https://github.com/afragen/github-updater) will be hidden from Plugins > Installed Plugins.
 
 ```
-define( 'CFL_OPTIONS' , ['deps' => [ 'carbon_fields' => '2.0.3', 'php' => '5.3.29' ], 'hide_plugins' => ['carbon-fields-loader', 'github-updater'], 'disable_updates' => true ] );
+define( 'CFL_OPTIONS' , ['deps' => [ 'carbon_fields' => '2.1.0', 'php' => '5.3.29' ], 'hide_plugins' => ['carbon-fields-loader', 'github-updater'], 'disable_updates' => true ] );
 ````
 
-* Carbon Fields >=2.0.3 and >=PHP 5.3.29 must be loaded, else notice is displayed.
+* Carbon Fields >=2.1.0 and >=PHP 5.3.29 must be loaded, else notice is displayed.
 * This plugin and GitHub Updater are hidden from Plugins > Installed Plugins.
 * Update notifications are disabled for this plugin. (If [GitHub Updater](https://github.com/afragen/github-updater) is installed.)
 
 ```
-define( 'CFL_OPTIONS' , ['min_version' => '2.0.4', 'hide_plugins' => 'carbon-fields-loader', 'remove_actions' => ['deactivate', 'edit'], 'disable_updates' => true ] );
+define( 'CFL_OPTIONS' , ['min_version' => '2.1.0', 'hide_plugins' => 'carbon-fields-loader', 'remove_actions' => ['deactivate', 'edit'], 'disable_updates' => true ] );
 ```
 
-* Carbon Fields 2.0.4 or higher must be loaded, else notice is displayed.
+* Carbon Fields 2.1.0 or higher must be loaded, else notice is displayed.
 * This plugin (but not GitHub Updater) is hidden from Plugins > Installed Plugins.
 * Removes "Deactivate" and "Edit" action links from this plugin.
 * Update notifications are disabled for this plugin.
@@ -116,7 +116,7 @@ Please see the wiki for [usage examples](https://github.com/dmhendricks/carbon-f
 
 **_Q: How do I update this plugin to use a newer version or a different branch of the Carbon Fields Framework?_**
 
-A: If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": ">=2.0.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
+A: If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": "^2.1.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
 
 **_Q: How can I get auto-updates?_**
 
@@ -124,21 +124,20 @@ A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
 ## Change Log
 
-#### Branch: master (unreleased)
-* Fixed several translation issues
-* Greatly improved dependency checking
-* Added configurable constants:
-	* `CFL_OPTIONS` (PHP 7+ only)
-	* `CFL_DISABLE_UPDATE_NOTIFICATION`
-	* `CFL_HIDE_GITHUB_UPDATER`
-	* `CFL_DISABLE_DEACTIVATE`
-	* `CFL_DESCRIPTION_NOTICE`
-* Renamed `CFL_REMOVE_PLUGIN_LINKS` to `CFL_REMOVE_PLUGIN_ACTIONS`
-* Added min/max WordPress tested version compatibility to plugin header
-* Adjusted `readme.txt` formatting; updated version/content
-* Fixed bug with `show_notice()` breaking frontend when exception occurs.
-* Updated Carbon Fields framework to 2.1.0
+Release changes are noted on the [Releases](https://github.com/dmhendricks/carbon-fields-loader/releases) page.
 
-#### Releases
+#### Branch: `master`
 
-Changes related to each release are maintained on the [Releases](https://github.com/dmhendricks/carbon-fields-loader/releases) page.
+* None since release
+
+## Credits
+
+Please support [humans.txt](http://humanstxt.org/). It's an initiative for knowing the people behind a web site. It's an unobtrusive text file that contains information about the different people who have contributed to building the web site.
+
+**Carbon Fields**
+
+	URL: http://carbonfields.net/
+	Author: htmlBurger.com
+	Twitter: @htmlburger
+	Author URI: https://htmlburger.com/
+	Location: London, England

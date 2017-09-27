@@ -47,4 +47,4 @@ A. This may occur when you are running an outdated version of the Carbon Fields 
 A: Install [GitHub Updater](https://github.com/afragen/github-updater).
 
 #### Q. How do I update this thing to use a newer version or a different branch?
-If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": ">=2.0.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
+If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": "^2.1.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
