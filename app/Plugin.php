@@ -43,7 +43,7 @@ class Plugin {
     add_action( 'after_setup_theme', array( 'Carbon_Fields\\Carbon_Fields', 'boot' ) );
 
     if( $this->verify_dependencies( 'carbon_fields' ) === true ) {
-      add_action( 'carbon_fields_loaded', array( $this, 'load_plugin' ));
+      add_action( 'carbon_fields_fields_registered', array( $this, 'load_plugin' ));
     }
 
   }

@@ -4,7 +4,7 @@
  * Plugin Name:       Carbon Fields Loader
  * Plugin URI:        https://github.com/dmhendricks/carbon-fields-loader/
  * Description:       A loader plugin for the Carbon Fields framework.
- * Version:           2.1.0
+ * Version:           2.1.1
  * Author:            Daniel M. Hendricks
  * Author URI:        https://www.danhendricks.com
  * Text Domain:       cfloader
@@ -16,7 +16,7 @@
  * GitHub Plugin URI: dmhendricks/carbon-fields-loader
  */
 
-/*	Copyright 2017	  Daniel M. Hendricks (https://www.danhendricks.com/)
+/*	Copyright 2018	  Daniel M. Hendricks (https://www.danhendricks.com/)
 
 		This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -33,17 +33,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-if(!defined('WPINC')) die();
+if( !defined( 'WPINC' ) ) die();
 
 require( __DIR__ . '/vendor/autoload.php' );
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 // Initialize plugin - Change to use your own namespace
 new \TwoLabNet\CarbonFieldsLoader\Plugin(array(
-	'data' => get_plugin_data(__FILE__),
-	'path' => realpath(plugin_dir_path(__FILE__)).DIRECTORY_SEPARATOR,
-	'url' => plugin_dir_url(__FILE__),
-	'deps' => array( 'php' => '5.3', 'carbon_fields' => '2.1.0' ),
-	'plugin_file' => plugin_basename(__FILE__)
+	'data' => get_plugin_data( __FILE__ ),
+	'path' => realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR,
+	'url' => plugin_dir_url( __FILE__ ),
+	'deps' => array( 'php' => '5.3', 'carbon_fields' => '2.1.1' ),
+	'plugin_file' => plugin_basename( __FILE__ )
 ));
 ?>

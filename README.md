@@ -28,10 +28,10 @@ Because we don't like "admins" monkeying around and disabling (or touching) thin
 ### PHP 5.3 and Higher
 
 ```
-define( 'CFL_MIN_VERSION', '2.1.0' );
+define( 'CFL_MIN_VERSION', '2.1.1' );
 ```
 
-Sets the minimum supported loaded version of Carbon Fields to >=2.1.0.
+Sets the minimum supported loaded version of Carbon Fields to >=2.1.1.
 
 ```
 define( 'CFL_DISABLE_UPDATE_NOTIFICATION', true );
@@ -88,25 +88,25 @@ define( 'CFL_OPTIONS', array( ... ) );
 #### Examples
 
 ```
-define( 'CFL_OPTIONS' , ['min_version' => '2.1.0', 'hide_plugins' => true ] );
+define( 'CFL_OPTIONS' , ['min_version' => '2.1.1', 'hide_plugins' => true ] );
 ```
 
-* Carbon Fields 2.1.0 or higher must be loaded, else notice is displayed.
+* Carbon Fields 2.1.1 or higher must be loaded, else notice is displayed.
 * This plugin *and* [GitHub Updater](https://github.com/afragen/github-updater) will be hidden from Plugins > Installed Plugins.
 
 ```
-define( 'CFL_OPTIONS' , ['deps' => [ 'carbon_fields' => '2.1.0', 'php' => '5.3.29' ], 'hide_plugins' => ['carbon-fields-loader', 'github-updater'], 'disable_updates' => true ] );
+define( 'CFL_OPTIONS' , ['deps' => [ 'carbon_fields' => '2.1.1', 'php' => '5.3.29' ], 'hide_plugins' => ['carbon-fields-loader', 'github-updater'], 'disable_updates' => true ] );
 ````
 
-* Carbon Fields >=2.1.0 and >=PHP 5.3.29 must be loaded, else notice is displayed.
+* Carbon Fields >=2.1.1 and >=PHP 5.3.29 must be loaded, else notice is displayed.
 * This plugin and GitHub Updater are hidden from Plugins > Installed Plugins.
 * Update notifications are disabled for this plugin. (If [GitHub Updater](https://github.com/afragen/github-updater) is installed.)
 
 ```
-define( 'CFL_OPTIONS' , ['min_version' => '2.1.0', 'hide_plugins' => 'carbon-fields-loader', 'remove_actions' => ['deactivate', 'edit'], 'disable_updates' => true ] );
+define( 'CFL_OPTIONS' , ['min_version' => '2.1.1', 'hide_plugins' => 'carbon-fields-loader', 'remove_actions' => ['deactivate', 'edit'], 'disable_updates' => true ] );
 ```
 
-* Carbon Fields 2.1.0 or higher must be loaded, else notice is displayed.
+* Carbon Fields 2.1.1 or higher must be loaded, else notice is displayed.
 * This plugin (but not GitHub Updater) is hidden from Plugins > Installed Plugins.
 * Removes "Deactivate" and "Edit" action links from this plugin.
 * Update notifications are disabled for this plugin.
@@ -123,7 +123,7 @@ Please see the wiki for [usage examples](https://github.com/dmhendricks/carbon-f
 
 **_Q: How do I update this plugin to use a newer version or a different branch of the Carbon Fields Framework?_**
 
-A: If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": "^2.1.0"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
+A: If you just want to pull the latest release version of Carbon Fields from the repo, run `composer update`. If you want to pull a different branch, open *composer.json* and edit the line: `"htmlburger/carbon-fields": "^2.1.1"`. Set the version to `"dev-branch"` (for example, if you want the *development* branch, set it to `"dev-development"`), then run `composer update`.
 
 **_Q: How can I get auto-updates?_**
 
