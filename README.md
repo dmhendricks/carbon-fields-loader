@@ -7,6 +7,8 @@
 
 # Carbon Fields Loader Plugin for WordPress
 
+**DEPRECATION NOTICE:** This plugin has been deprecated in favor of the [official Carbon Fields plugin](https://github.com/htmlburger/carbon-fields-plugin/).
+
 This is a simple plugin that may be used to load the latest **_release_** version of [Carbon Fields](http://carbonfields.net/).
 
 This plugin is **_not_** supported or maintained by [htmlBurger](https://htmlburger.com) and team, the creators and maintaners of [Carbon Fields](https://carbonfields.net/). The author of this loader plugin has no affiliation with htmlBurder or the Carbon Fields team.
